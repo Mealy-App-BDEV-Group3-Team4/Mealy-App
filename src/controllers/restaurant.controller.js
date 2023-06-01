@@ -1,4 +1,4 @@
-import {createRestaurantValidator, updateRestaurantValidator} from "../validators/Restaurant.validator.js"
+import {createRestaurantValidator, updateRestaurantValidator} from "../validators/restaurant.validator.js"
 import Restaurant from "../model/restaurant.model.js"
 import User from "../model/user.model.js"
 import { BadUserRequestError, NotFoundError } from "../error/error.js"

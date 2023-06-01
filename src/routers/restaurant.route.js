@@ -1,5 +1,5 @@
 import express from 'express';
-import RestaurantController from '../controllers/user.controller.js'
+import RestaurantController from '../controllers/restaurant.controller.js'
 import { tryCatchHandler } from '../utils/tryCatch.handler.js'
 
 const router = new express.Router()

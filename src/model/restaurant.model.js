@@ -11,10 +11,10 @@ restaurantAddress: {
     type: String,
     required: true
   },
-  contactInfo: {
-    type: String,
-    required: true
-  },
+  // contactInfo: {
+  //   type: Number,
+  //   required: true
+  // },
   
   customer: {
     type: Types.ObjectId,
@@ -26,4 +26,4 @@ restaurantAddress: {
   timestamps: true
 })
 
-export default model(Restaurant, RestaurantSchema)
+export default model("Restaurant", RestaurantSchema)

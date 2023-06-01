@@ -15,14 +15,14 @@ import {config} from "../config/index.js"
 export default class UserController {
 
   static async userSignUp(req, res) {
-    const { error, value } = userSignUpValidator.validate(req.body)
-    console.log(error.details[0].message)
-    console(value)
-    if (error) return res.status(400).json({status: "failed", message: error.details[0].message })
+     const { error, value } = userSignUpValidator.validate(req.body)
+     console.log(error)
+     if (error) return res.status(400).json({status: "failed", message: error.details[0].message })
+     const usernameExists = await User.find({ userName: req.body.userName })
+    if (usernameExists.length > 0) throw new BadUserRequestError("An account with this username already exists.")
     const emailExists = await User.find({ email: req.body.email })
     if (emailExists.length > 0) throw new BadUserRequestError("An account with this email already exists.")
-    const usernameExists = await User.find({ userName: req.body.userName })
-    if (usernameExists.length > 0) throw new BadUserRequestError("An account with this username already exists.")
+    
     const saltRounds = config.bycrypt_salt_round
     const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
     const user = {

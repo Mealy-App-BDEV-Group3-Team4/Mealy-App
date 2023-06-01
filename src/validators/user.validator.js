@@ -12,7 +12,7 @@ export const userSignUpValidator = Joi.object({
   .messages({
     'string.pattern.base': 'You need one number, one alphanumeric character and one in caps, password be more than 7 characters long',
   }),
-  userAddress: Joi.string().optional(),
+  userAddress: Joi.string().required(),
   
 }).strict()
 

@@ -23,6 +23,7 @@ const UserSchema = new Schema({
   },
   userAddress: {
     type: String,
+    required: true
     }
 },
 {

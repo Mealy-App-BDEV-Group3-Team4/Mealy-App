@@ -18,10 +18,11 @@ export default class UserController {
      const { error, value } = userSignUpValidator.validate(req.body)
      console.log(error)
      if (error) return res.status(400).json({status: "failed", message: error.details[0].message })
-     const usernameExists = await User.find({ userName: req.body.userName })
-    if (usernameExists.length > 0) throw new BadUserRequestError("An account with this username already exists.")
-    const emailExists = await User.find({ email: req.body.email })
-    if (emailExists.length > 0) throw new BadUserRequestError("An account with this email already exists.")
+     const usernameExists = await User.findOne({ userName: req.body.userName })
+     console.log(usernameExists, "This is what im logging")
+    if (usernameExists != null || usernameExists != undefined) throw new BadUserRequestError("An account with this username already exists.")
+    const emailExists = await User.findOne({ email: req.body.email })
+    if (emailExists) throw new BadUserRequestError("An account with this email already exists.")
     
     const saltRounds = config.bycrypt_salt_round
     const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
@@ -146,8 +147,6 @@ static async resetUserPassword(req, res) {
       console.log(error);
   }
 }
-
-  
   
 static async logoutUser(req, res) {
   try {

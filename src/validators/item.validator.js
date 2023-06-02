@@ -19,7 +19,7 @@ export const createNewItemValidator = Joi.object({
  
   category: Joi.string().required(),
 //   restaurant: Joi.string().required(),
-  image_url: Joi.string().required(),
+  // image_url: Joi.string().required(),
   }).strict()
 
 

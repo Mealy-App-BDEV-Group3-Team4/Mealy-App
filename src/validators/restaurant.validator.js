@@ -7,7 +7,7 @@ export const createRestaurantValidator = Joi.object({
   restaurantAddress: Joi.string().required(),
   contactInfo: Joi.string().required(),
   category: Joi.string().required(),
-  image_url: Joi.string().required()
+  // image_url: Joi.string().required()
 }).strict()
 
 export const updateCategoryValidator = Joi.object({

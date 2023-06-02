@@ -20,10 +20,10 @@ const RestaurantSchema =new Schema(
     type: String,
     required: true
   },
-  image_url: {
-    type: String,
-    required: true
-  },
+  // image_url: {
+  //   type: String,
+  //   required: true
+  // },
 
 //   customer: {
 //     type: Types.ObjectId,

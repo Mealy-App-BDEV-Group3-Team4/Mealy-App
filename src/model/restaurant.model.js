@@ -12,7 +12,7 @@ restaurantAddress: {
     required: true
   },
   contactInfo: {
-    type: Number,
+    type: String,
     required: true
   },
   

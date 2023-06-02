@@ -11,8 +11,8 @@ export const createRestaurantValidator = Joi.object({
 }).strict()
 
 export const updateCategoryValidator = Joi.object({
-  customer: Joi.objectId().required(),
-  customerId: Joi.objectId().required(),
+  // customer: Joi.objectId().required(),
+  // customerId: Joi.objectId().required(),
   status: Joi.string().valid('pending', 'in-progress', 'completed').required(),
   name: Joi.string().optional(),
   menu: Joi.string().optional(),

@@ -5,15 +5,15 @@ export const createRestaurantValidator = Joi.object({
   customerId: Joi.objectId().required(),
   name: Joi.string().required(),
   restaurantAddress: Joi.string().required(),
-  // contactInfo: Joi.string().required()
+  contactInfo: Joi.string().required()
 }).strict()
 
 export const updateRestaurantValidator = Joi.object({
   customer: Joi.objectId().required(),
   customerId: Joi.objectId().required(),
  status: Joi.string().valid('pending', 'in-progress', 'completed').required(),
- name: Joi.string().optional(),
- restaurantAddress: Joi.string().optional(),
+ name: Joi.string().required(),
+
 }).strict()
 
 export const updateCategoryValidator = Joi.object({

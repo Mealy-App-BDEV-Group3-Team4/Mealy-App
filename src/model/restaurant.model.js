@@ -11,10 +11,10 @@ restaurantAddress: {
     type: String,
     required: true
   },
-  // contactInfo: {
-  //   type: Number,
-  //   required: true
-  // },
+  contactInfo: {
+    type: Number,
+    required: true
+  },
   
   customer: {
     type: Types.ObjectId,

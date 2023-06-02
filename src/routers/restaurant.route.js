@@ -9,13 +9,9 @@ router.post("/create", userAuthMiddleWare, tryCatchHandler( RestaurantController
 
 
 
-router.get("/", tryCatchHandler( RestaurantController.findRestaurant) )
 
-router.get('/:id', tryCatchHandler( RestaurantController.findRestaurant) )
 
-router.put('/:id', tryCatchHandler( RestaurantController.findRestaurant) )
 
-router.delete('/:id', tryCatchHandler( RestaurantController.deleteOneRestaurant) )
 
 
 export { router }

@@ -5,24 +5,19 @@ import { BadUserRequestError, NotFoundError } from "../error/error.js"
 import { mongoIdValidator } from "../validators/mongoId.validator.js"
 
 export default class RestaurantController {
-  static async createRestaurant(req, res) {
-    const { error } = createRestaurantValidator.validate(req.body);
-  
-    if (error) {
-      throw error;
-    }
-  
-    const newRestaurant = await Restaurant.create(req.body);
-  
-    res.status(201).json({
+  static async createRestaurant(req, res,){
+      const {error } = createRestaurantValidator.validate(req.body)
+      if(error) throw error
+      const newRestaurant = await Restaurant.create({...req.body, user: req.user._id , userId: req.user._id })
+      res.status(201).json({
       message: "Restaurant created successfully",
       status: "Success",
-      data: {
+      data:{
         restaurant: newRestaurant
       }
-    });
+    })
   }
-  
+
   static async updateOneRestaurant(req, res){
     const { id } = req.query
     const { error } = mongoIdValidator.validate(req.query)

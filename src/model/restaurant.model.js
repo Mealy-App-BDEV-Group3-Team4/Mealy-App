@@ -4,7 +4,8 @@ const RestaurantSchema =new Schema(
 {
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   
 restaurantAddress: {
@@ -16,12 +17,12 @@ restaurantAddress: {
     required: true
   },
   
-  customer: {
+  user: {
     type: Types.ObjectId,
     ref: "User",
     required: true
   }, 
-  customerId:String
+  userId:String
 },{
   timestamps: true
 })

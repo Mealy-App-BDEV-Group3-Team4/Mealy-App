@@ -4,26 +4,36 @@ const RestaurantSchema =new Schema(
 {
   name: {
     type: String,
-    required: true
+    required: true,
+    //unique: true
   },
-  
-restaurantAddress: {
+  restaurantAddress: {
     type: String,
-    required: true
+    required: true,
+    //unique: true
   },
   contactInfo: {
     type: String,
+    required: true,
+  },
+  category: {
+    type: String,
     required: true
   },
-  
-  customer: {
-    type: Types.ObjectId,
-    ref: "User",
+  image_url: {
+    type: String,
     required: true
-  }, 
-  customerId:String
-},{
+  },
+
+//   customer: {
+//     type: Types.ObjectId,
+//     ref: "User",
+//     required: true
+//   }, 
+//   customerId:String
+},
+{
   timestamps: true
 })
 
-export default model(Restaurant, RestaurantSchema)
+export default model('Restaurant', RestaurantSchema)

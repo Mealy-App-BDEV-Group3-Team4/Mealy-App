@@ -11,6 +11,17 @@ export function generateToken(user){
   return token 
 }
 
+export function getRestaurantToken(restaurant){
+  const payload = {
+    _id: restaurant._id,
+    name: restaurant.name,
+    restaurantAddress: restaurant.restaurantAddress,
+    contactInfo: restaurant.contactInfo
+  }
+  const token = jwt.sign(payload, config.jwt_secret_key, {});
+  return token 
+}
+
 export function verifyToken(token){
  return jwt,verify(token, config.jwt_secret_key)
 }

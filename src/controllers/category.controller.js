@@ -1,4 +1,4 @@
-import {createCategoryValidator, updateCategoryValidator} from "../validators/Category.validator.js"
+import {createCategoryValidator, updateCategoryValidator} from "../validators/category.validator.js"
 import Category from "../model/category.model.js"
 import User from "../model/user.model.js"
 import { BadUserRequestError, NotFoundError } from "../error/error.js"

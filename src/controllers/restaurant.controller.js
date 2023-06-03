@@ -24,7 +24,7 @@ export default class RestaurantController {
     const { error } = getOneRestaurantValidator.validate(req.query)
     if( error ) throw new BadUserRequestError("category does not exist")
 
-    const restaurant = await Restaurant.findAll(id)
+    const restaurant = await Restaurant.findOne(id)
     if(!restaurant) throw new NotFoundError(`The restaurant with category: ${id}, does not exist`)
 
     return res.status(200).json({

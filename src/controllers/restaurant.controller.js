@@ -1,4 +1,4 @@
-import {createRestaurantValidator, updateRestaurantValidator, getOneRestaurantValidator} from "../validators/restaurant.validator.js"
+import {createRestaurantValidator, getOneRestaurantValidator,} from "../validators/restaurant.validator.js"
 import Restaurant from "../model/restaurant.model.js"
 import User from "../model/user.model.js"
 import { BadUserRequestError, NotFoundError } from "../error/error.js"
@@ -18,46 +18,47 @@ export default class RestaurantController {
     })
   }
 
-  // static async updateOneRestaurant(req, res){
-  //   const { id } = req.query
-  //   const { error } = mongoIdValidator.validate(req.query)
-  //   if( error ) throw new BadUserRequestError("Please pass in a valid mongoId")
 
-  //   const updateValidatorResponse = await updateRestaurantValidator.validate(req.body)
-  //   const updateRestaurantError = updateValidatorResponse.error
-  //   if(updateRestaurantError) throw updateRestaurantError
+  static async searchByCategory(req, res) {
+    const { id } = req.query
+    const { error } = getOneRestaurantValidator.validate(req.query)
+    if( error ) throw new BadUserRequestError("category does not exist")
 
-  //   const restaurant = await Restaurant.findById(id)
-  //   if(!restaurant) throw new NotFoundError(`The Restaurant with this id: ${id}, does not exist`)
-
-  //   const updatedRestaurant = await Restaurant.findByIdAndUpdate(id, req.body, {new: true})
-  //   return res.status(200).json({
-  //     message: "Restaurant updated successfully",
-  //     status: "Success",
-  //     data:{
-  //       restaurant: updatedRestaurant
-  //     }
-  //   })
-  // }
-
-
-
-  static async getOneRestaurant(req, res) {
-    const { category} = req.params
-    const { error } = getOneRestaurantValidator.validate(req.params)
-    if( error ) throw new BadUserRequestError("Please pass in a valid mongoId")
-
-    const restaurant = await Restaurant.findOne(req.params.category)
-    if(!restaurant) throw new NotFoundError(`The Restaurant with this id: ${category}, does not exist`)
+    const restaurant = await Restaurant.findOne(id)
+    if(!restaurant) throw new NotFoundError(`The restaurant with category: ${id}, does not exist`)
 
     return res.status(200).json({
-      message: "Restaurantfound successfully",
+      message: "Restaurant found successfully",
       status: "Success",
       data: {
         restaurant: restaurant
       }
     })
   }
+
+
+  static async searchByKeyword(req, res) {
+    const restaurants = await Restaurant.find({
+      $or: [
+        { name: { $regex: keyword, $options: "i" } },
+        { restaurantAddress: { $regex: keyword, $options: "i" } },
+        { contactInfo: { $regex: keyword, $options: "i" } },
+      ],
+    });
+
+    if (restaurants.length === 0) {
+      throw new NotFoundError(`No restaurants found for the keyword: ${keyword}`);
+    }
+
+    return res.status(200).json({
+      message: "Restaurant found successfully",
+      status: "Success",
+      data: {
+        restaurant: restaurants
+      }
+    })
+  }
+  
 
 
   static async deleteOneRestaurant(req, res) {

@@ -12,3 +12,34 @@ export function userAuthMiddleWare(req, res, next){
     throw new UnAuthorizedError("Access denied, invalid token.")
   }
 } 
+
+
+export function restaurantAuthMiddleWare(req, res, next) {
+  const { category } = req.query;
+
+  if (!category) {
+    return res.status(400).json({
+      success: false,
+      error: "Missing category parameter in req.query"
+    });
+  }
+
+  next();
+}
+
+
+export function searchByKeywordMiddleware(req, res, next) {
+  const { keyword } = req.query;
+
+  if (keyword) {
+    req.searchFilter = {
+      $or: [
+        { name: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+        { category: { $regex: keyword, $options: "i" } },
+      ],
+    };
+  }
+
+  next();
+}

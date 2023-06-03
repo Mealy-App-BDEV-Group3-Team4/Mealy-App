@@ -147,21 +147,28 @@ static async resetUserPassword(req, res) {
       console.log(error);
   }
 }
-  
-static async logoutUser(req, res) {
-  try {
-    res.clearCookie('jwt');
-    res.status(200).json({
-      message: "Logout successful",
-      status: "Success"
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "Error occurred during logout",
-      status: "Error"
-    });
+
+
+  static async logOut(req, res) {
+    const { tokenId } = req.body;
+
+    try {
+      await Token.deleteOne({ _id: tokenId });
+
+      res.status(200).json({
+        message: "Token deleted successfully",
+        status: "Success"
+      });
+    } catch (error) {
+      console.error('Error deleting token:', error);
+      res.status(500).json({
+        message: "Failed to delete token",
+        status: "Error"
+      });
+    }
   }
-};
+
+
 
 
 static async findUser(req, res,) {

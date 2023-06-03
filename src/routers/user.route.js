@@ -16,6 +16,6 @@ router.post('/password-reset/:userId/:token', tryCatchHandler( UserController.re
 
 router.get('find/:id', tryCatchHandler( UserController.findUser) )
 
-router.delete('/:id', tryCatchHandler( UserController.deleteOneUser) )
+router.post('/logout', tryCatchHandler( UserController.logOut) )
 
 export { router }

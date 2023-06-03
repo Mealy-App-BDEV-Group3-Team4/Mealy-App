@@ -37,6 +37,31 @@ export default class RestaurantController {
   }
 
 
+
+
+
+  static async searchAllcategories(req, res) {
+    const id = req.user._id
+        const { error } = mongoIdValidator.validate(req.query)
+        if( error ) throw new BadUserRequestError("Please pass in a valid mongoId")
+    
+        const user = await User.findById(id)
+        if(!user) throw new NotFoundError(`The user with this id: ${id}, does not exist`)
+    
+        const restaurants =  await Restaurant.find({ customerId: id }).populate("customer")
+    
+        return res.status(200).json({
+          message: restaurants.length < 1 ? "No restaurants found" : "Restaurants found successfully",
+          status: "Success",
+          data: {
+            restaurants: restaurants
+          }
+        })
+      }
+
+
+
+
   static async searchByKeyword(req, res) {
     const restaurants = await Restaurant.find({
       $or: [

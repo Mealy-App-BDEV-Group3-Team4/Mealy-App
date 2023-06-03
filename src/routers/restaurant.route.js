@@ -9,6 +9,7 @@ const router = new express.Router()
 
 router.post("/create", userAuthMiddleWare, tryCatchHandler( RestaurantController.createRestaurant) )
 router.get("/:category", restaurantAuthMiddleWare, tryCatchHandler( RestaurantController.searchByCategory) )
+router.get("/all-categories", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchAllcategories))
 router.get("/search", searchByKeywordMiddleware, tryCatchHandler( RestaurantController.searchByKeyword) )
 
 

@@ -13,11 +13,20 @@ export class BadUserRequestError extends Error {
     this.errorType = "BadUserRequestError";
   }
 }
+
 export class UnAuthorizedError extends Error {
   constructor(message){
     super(message)
     this.status = 401;
     this.errorType = "UnAuthorizedError";
+  }
+}
+
+export class AccessDeniedError extends Error {
+  constructor(message){
+    super(message)
+    this.status = 401;
+    this.errorType = "AccessDeniedError";
   }
 }
 

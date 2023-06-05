@@ -9,28 +9,24 @@ const router = Router()
 
 router.post("/create", restaurantAuthMiddleWare , tryCatchHandler( ItemController.createNewItem))
 
+router.get("/details/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getItemDetails))
+
+router.get("/nutri-info/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getNutritionInfo))
+
+router.get("/all-reviews/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getItemReviews))
+
+router.get("/by-restaurant/:id", userAuthMiddleWare, tryCatchHandler( ItemController.findItemsByRestaurant))
+
+router.get("/by-category/:id", userAuthMiddleWare,  tryCatchHandler( ItemController.findItemsByCategory))
+
+router.get("/by-keyword/:keyword", userAuthMiddleWare,  tryCatchHandler( ItemController.findItemsByKeyword))
+
+router.post("/review/:id", userAuthMiddleWare, tryCatchHandler( ItemController.addReview))
+
+router.delete("/delete/:id", restaurantAuthMiddleWare, tryCatchHandler( ItemController.deleteItem))
+
+
 //router.post("/image", tryCatchHandler(ItemController.uploadImage))
-
-router.get("/item", userAuthMiddleWare, tryCatchHandler( ItemController.getItemDetails))
-
-router.get("/by-category", userAuthMiddleWare,  tryCatchHandler( ItemController.findItemsByCategory))
-
-router.get("/by-keyword", userAuthMiddleWare,  tryCatchHandler( ItemController.findItemsByKeyword))
-
-router.get("/by-restaurant", userAuthMiddleWare, tryCatchHandler( ItemController.findItemsByRestaurant))
-
-router.get("/info", userAuthMiddleWare, tryCatchHandler( ItemController.getNutritionInfo))
-
-router.get("/cart", userAuthMiddleWare, tryCatchHandler( ItemController.addItemToCart))
-
-router.get("/favourites", userAuthMiddleWare, tryCatchHandler( ItemController.addItemToFavourites))
-
-router.post("/review", userAuthMiddleWare, tryCatchHandler( ItemController.addReview))
-
-router.get("/allreviews", userAuthMiddleWare, tryCatchHandler( ItemController.getAllReviews))
-
-router.delete("/delete", userAuthMiddleWare, tryCatchHandler( ItemController.removeFromFavourites))
-
 
 export {router}
 

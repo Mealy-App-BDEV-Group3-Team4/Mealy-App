@@ -7,7 +7,8 @@ export function generateToken(user){
     email: user.email,
     userName: user.userName
   }
-  const token = jwt.sign(payload, config.jwt_secret_key, { expiresIn: 60 * 60 * 24 });
+  const token = jwt.sign(payload, config.jwt_secret_key_user, { expiresIn: 60 * 60 * 24 });
+  console.log(token)
   return token 
 }
 
@@ -18,10 +19,14 @@ export function getRestaurantToken(restaurant){
     restaurantAddress: restaurant.restaurantAddress,
     contactInfo: restaurant.contactInfo
   }
-  const token = jwt.sign(payload, config.jwt_secret_key, {});
+  const token = jwt.sign(payload, config.jwt_secret_key_restr, {});
   return token 
 }
 
-export function verifyToken(token){
- return jwt,verify(token, config.jwt_secret_key)
+export function verifyUserToken(token){
+  return jwt,verify(token, config.jwt_secret_key_user)
+}
+
+export function verifyRestaurantToken(token){
+  return jwt,verify(token, config.jwt_secret_key_restr)
 }

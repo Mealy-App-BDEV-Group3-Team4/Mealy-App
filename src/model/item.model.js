@@ -1,4 +1,4 @@
-import { Schema, model, Types } from "mongoose"
+import { Schema, model, Types, Query } from "mongoose"
 
 
 const ItemSchema = new Schema({
@@ -38,48 +38,46 @@ const ItemSchema = new Schema({
       },
     category: {
         type: String,
-        enum: ['specials', 'quick_fixes', 'extras'],
+        enum: { 
+          values: ['specials', 'quick_fixes', 'extras'], 
+          message: '{VALUE} is not supported'
+        },
         default: 'specials',
+        lowercase: true,
         required: true
       },
     image_url: {
         type: String,
         required: true
       },
-  //   nutrition_info: {
-//       ingredients: {
-//         type: String,
-//         required: true
-//       },
-//       calories: {
-//         type: String,
-//         required: true
-//       },
-//  },
-//  review: {
-//       customer_name: {
-//         type: String,
-//         ref: "User",
-//         //required: true,
-//       },
-//       customer_rating: {
-//         type: String,
-//         ref: "User",
-//         //required: true,
-//       },
-//       statement: {
-//         type: String,
-//         ref: "User",
-//        // required: true,
-//       },
-//       dateReviewed: {
-//         type: Date,
-//         ref: "User",
-//         //default: new Date()
-//       },
-  //},
- // [{ text: String, date: {type:String, default: new Date()} }]
- 
-  }) 
+    nutritional_info: {
+      ingredients: String,
+      calories: String,
+  },
+   review: {
+      type: [{
+        customer: {
+          type: Types.ObjectId,
+          ref: "User",
+        },
+        rating : Number,
+        statement: String,
+        dateReviewed: {
+            type: String,
+            default: new Date()
+          },
+      }],
+}
+   
+}) 
+
+  ItemSchema.pre(/^find/, function (next){
+    if (this instanceof Query) {
+      this.where({ isDeleted: { $ne: true } }); 
+    }  
+    next()
+  })
+
+  ItemSchema.index({ "name": "text", "description": "text", "category": "text"});
 
 export default model('Item', ItemSchema)

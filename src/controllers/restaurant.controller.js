@@ -12,7 +12,6 @@ export default class RestaurantController {
       if(error) throw error
       // const newRestaurant = await Restaurant.create({...req.body, customer: req.user._id, customerId: req.user._id })
       const nameExists = await Restaurant.find({ name: req.body.name })
-      console.log(nameExists.length)
       if (nameExists.length > 0) throw new BadUserRequestError("A restaurant with this name already exists.")
       const addressExists = await Restaurant.find({ restaurantAddress: req.body.restaurantAddress })
       if (addressExists.length > 0) throw new BadUserRequestError("A restaurant has been registered on this address.")

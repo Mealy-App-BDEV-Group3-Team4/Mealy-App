@@ -8,9 +8,18 @@ import {searchByKeywordMiddleware} from "../middleware/auth.js"
 const router = new express.Router()
 
 router.post("/create", userAuthMiddleWare, tryCatchHandler( RestaurantController.createRestaurant) )
-router.get("/:category", restaurantAuthMiddleWare, tryCatchHandler( RestaurantController.searchByCategory) )
-router.get("/all-categories", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchAllcategories))
-router.get("/search", searchByKeywordMiddleware, tryCatchHandler( RestaurantController.searchByKeyword) )
+
+router.get("/all-restaurants", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchAllrestaurants))
+
+router.get("/keyword", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchByKeyword) )
+
+router.get("/:category", searchByKeywordMiddleware, tryCatchHandler( RestaurantController.searchBycategory) )
+
+router.put("/update", userAuthMiddleWare, tryCatchHandler( RestaurantController.updateOneRestaurant))
+
+router.delete("/delete", userAuthMiddleWare, tryCatchHandler( RestaurantController.deleteOneRestaurant) )
+
+
 
 
 export { router }

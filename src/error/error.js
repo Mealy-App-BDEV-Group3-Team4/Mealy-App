@@ -29,3 +29,14 @@ export class MailNotSentError extends Error {
   }
 }
 
+
+export class AccessDeniedError extends Error {
+  constructor(message){
+    super(message)
+    this.status = 401;
+    this.errorType = "AccessDeniedError";
+  }
+}
+
+
+

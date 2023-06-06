@@ -13,21 +13,6 @@ export function userAuthMiddleWare(req, res, next){
   }
 } 
 
-
-export function restaurantAuthMiddleWare(req, res, next) {
-  const { category } = req.query;
-
-  if (!category) {
-    return res.status(400).json({
-      success: false,
-      error: "Missing category parameter in req.query"
-    });
-  }
-
-  next();
-}
-
-
 export function searchByKeywordMiddleware(req, res, next) {
   const { keyword } = req.query;
 
@@ -43,3 +28,22 @@ export function searchByKeywordMiddleware(req, res, next) {
 
   next();
 }
+
+
+export function restaurantAuthMiddleWare(req, res, next) {
+  const { category } = req.query;
+
+  if (!category) {
+    return res.status(400).json({
+      success: false,
+      error: "Missing category parameter in req.query"
+    });
+  }
+
+  next();
+}
+
+
+
+
+

@@ -41,13 +41,13 @@ export default class OrderController {
         const orders = await Order.find({customer: req.user._id})
         if (!orders)
         return res.status(404).json({ 
-            status: "Failed", 
-            message: "Order history does not exist for this user" 
+            message: "Order history does not exist for this user",
+            status: "Failed" 
         });
     
        return res.status(200).json({ 
-        status: "Orders found!", 
-        message: "Success",
+        message: "Orders found!",
+        status: "Success", 
         order_history: orders 
        });
    }
@@ -62,14 +62,14 @@ export default class OrderController {
         const orders = await Order.find()
         if (!orders)
         return res.status(404).json({ 
-            status: "Failed", 
-            message: "No order history" 
+            message: "No order history",
+            status: "Failed" 
         });
     
        return res.status(200).json({ 
-        status: "Orders found!", 
-        message: "Success",
-        order_history: orders 
+           message: "Orders found!",
+           status: "Success", 
+           order_history: orders 
        });
    }
 

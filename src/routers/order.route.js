@@ -9,7 +9,7 @@ router.post ("/checkout/:id", userAuthMiddleWare, tryCatchHandler( OrderControll
 
 router.get("/by-user", userAuthMiddleWare, tryCatchHandler( OrderController.viewOrdersByUser))
 
-router.get("/all", userAuthMiddleWare, tryCatchHandler( OrderController.viewAllOrders))
+router.get("/all", tryCatchHandler( OrderController.viewAllOrders))
 
 router.post("/reorder/:id", userAuthMiddleWare, tryCatchHandler( OrderController.reorderItem))
 

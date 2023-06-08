@@ -180,7 +180,7 @@ export default class ItemController {
      let ratingRounded = Math.round(itemRating*10)/10
      await item.updateOne({ rating: ratingRounded })
         
-      res.status(201).json({
+      res.status(200).json({
       message: "Review added successfully",
       status: "Success",
       data:{

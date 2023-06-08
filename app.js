@@ -6,8 +6,9 @@ import { config } from "./src/config/index.js";
 
 import {router as userRouter} from "./src/routers/user.route.js"
 import {router as restaurantRouter} from "./src/routers/restaurant.route.js"
-import {router as categoryRouter} from "./src/routers/category.route.js"
+import {router as orderRouter} from "./src/routers/order.route.js"
 import {router as itemRouter} from "./src/routers/item.route.js"
+import {router as cartRouter} from "./src/routers/cart.route.js"
 
 const app = express()
 
@@ -20,8 +21,9 @@ app.use(express.json())
 
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/restaurant', restaurantRouter)
-app.use('/api/v1/category', categoryRouter)
+app.use('/api/v1/order', orderRouter)
 app.use('/api/v1/item', itemRouter)
+app.use('/api/v1/cart', cartRouter)
 
 app.use(globalErrorHandler)
 

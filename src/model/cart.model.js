@@ -7,23 +7,42 @@ const CartSchema = new Schema({
       ref: "User",
       required: true,
     },
-    
-   cart: {
+    orders: {
       type: [{
-        order: {
+        itemId: {
           type: Types.ObjectId,
           ref: "Item",
         },
-        dateOrdered: {
-            type: String,
-            default: new Date()
+        itemName: {
+          type: String,
+          ref: "Item",
+        },
+        unit_price: {
+          type: Number,
+          ref: "Item",
+        },
+        quantity: {
+           type: Number,
+           default: 0,
+          },
+        total: {
+            type: Number,
+            default: 0,
           },
       }],
-      default: undefined
-  }
-   
-// [{ text: String, date: {type:String, default: new Date()} }]
- 
+    },
+    subtotal: {
+      type: Number,
+      default: 0,
+    }
+ },
+{
+  timestamps: true
 }) 
 
+
+
 export default model('Cart', CartSchema)
+
+
+

@@ -2,12 +2,12 @@ import {Router} from "express"
 import ItemController from "../controllers/item.controller.js"
 import uploadImg from "../controllers/item.controller.js"
 import { tryCatchHandler } from "../utils/tryCatch.handler.js"
-import {restaurantAuthMiddleWare} from "../middleware/auth.js"
+import {restaurantAuthMiddleWare, itemAuthMiddleWare} from "../middleware/auth.js"
 import {userAuthMiddleWare} from "../middleware/auth.js"
 
 const router = Router()
 
-router.post("/create", restaurantAuthMiddleWare , tryCatchHandler( ItemController.createNewItem))
+router.post("/create", itemAuthMiddleWare , tryCatchHandler( ItemController.createNewItem))
 
 router.get("/details/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getItemDetails))
 

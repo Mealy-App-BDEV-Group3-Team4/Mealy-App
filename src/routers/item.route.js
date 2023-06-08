@@ -7,7 +7,7 @@ import {userAuthMiddleWare} from "../middleware/auth.js"
 
 const router = Router()
 
-router.post("/create", userAuthMiddleWare , tryCatchHandler( ItemController.createNewItem))
+router.post("/create", restaurantAuthMiddleWare , tryCatchHandler( ItemController.createNewItem))
 
 router.get("/details/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getItemDetails))
 

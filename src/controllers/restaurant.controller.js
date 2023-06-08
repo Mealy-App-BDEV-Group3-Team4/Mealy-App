@@ -54,6 +54,7 @@ export default class RestaurantController {
             { name: { $regex: keyword, $options: "i" } },
             { restaurantAddress: { $regex: keyword, $options: "i" } },
             { contactInfo: { $regex: keyword, $options: "i" } },
+            { category: { $regex: keyword, $options: "i" } },
           ],
         });
       

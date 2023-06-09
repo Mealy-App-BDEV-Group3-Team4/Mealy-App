@@ -5,18 +5,41 @@ import { BadUserRequestError, NotFoundError } from "../error/error.js"
 import { mongoIdValidator } from "../validators/mongoId.validator.js"
 
 export default class RestaurantController {
+
+
   static async createRestaurant(req, res,){
-      const {error } = createRestaurantValidator.validate(req.body)
-      if(error) throw error
-      const newRestaurant = await Restaurant.create({...req.body, user: req.user._id , userId: req.user._id })
-      res.status(201).json({
-      message: "Restaurant created successfully",
-      status: "Success",
-      data:{
-        restaurant: newRestaurant
-      }
-    })
-  }
+    const { error } = createRestaurantValidator.validate(req.body)
+    if(error) throw error
+    // const newRestaurant = await Restaurant.create({...req.body, customer: req.user._id, customerId: req.user._id })
+    const nameExists = await Restaurant.find({ name: req.body.name })
+    if (nameExists.length > 0) throw new BadUserRequestError("A restaurant with this name already exists.")
+    const addressExists = await Restaurant.find({ restaurantAddress: req.body.restaurantAddress })
+    if (addressExists.length > 0) throw new BadUserRequestError("A restaurant has been registered on this address.")
+
+    const newRestaurant = await Restaurant.create( req.body )
+    res.status(201).json({
+    message: "Restaurant registered successfully",
+    status: "Success",
+    data:{
+      restaurant: newRestaurant,
+      vendor_token: getRestaurantToken(newRestaurant),
+    }
+  })
+}
+
+
+  // static async createRestaurant(req, res,){
+  //     const {error } = createRestaurantValidator.validate(req.body)
+  //     if(error) throw error
+  //     const newRestaurant = await Restaurant.create({...req.body, user: req.user._id , userId: req.user._id })
+  //     res.status(201).json({
+  //     message: "Restaurant created successfully",
+  //     status: "Success",
+  //     data:{
+  //       restaurant: newRestaurant
+  //     }
+  //   })
+  // }
 
 
   static async searchAllrestaurants(req, res) {

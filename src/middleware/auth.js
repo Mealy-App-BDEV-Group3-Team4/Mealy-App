@@ -31,7 +31,7 @@ export function searchByKeywordMiddleware(req, res, next) {
 }
 
 
-export function restaurantAuthMiddleWare(req, res, next) {
+export function restaurant1AuthMiddleWare(req, res, next) {
   const { category } = req.query;
 
   if (!category) {
@@ -44,7 +44,7 @@ export function restaurantAuthMiddleWare(req, res, next) {
   next();
 }
 
-export function itemAuthMiddleWare(req, res, next){
+export function restaurantAuthMiddleWare(req, res, next){
   const token = req.headers?.authorization?.split(" ")[1];
   if(!token) throw new UnAuthorizedError("Not a registered restaurant. Provide a token!!")
   try {

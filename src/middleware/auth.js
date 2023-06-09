@@ -31,7 +31,7 @@ export function searchByKeywordMiddleware(req, res, next) {
 }
 
 
-export function restaurant1AuthMiddleWare(req, res, next) {
+export function restaurantAut2hMiddleWare(req, res, next) {
   const { category } = req.query;
 
   if (!category) {

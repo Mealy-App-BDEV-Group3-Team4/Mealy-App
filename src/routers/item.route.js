@@ -1,13 +1,12 @@
 import {Router} from "express"
 import ItemController from "../controllers/item.controller.js"
-import uploadImg from "../controllers/item.controller.js"
 import { tryCatchHandler } from "../utils/tryCatch.handler.js"
-import {restaurant1AuthMiddleWare, restaurantAuthMiddleWare} from "../middleware/auth.js"
+import {restaurantAuthMiddleWare} from "../middleware/auth.js"
 import {userAuthMiddleWare} from "../middleware/auth.js"
 
 const router = Router()
 
-router.post("/create", restaurantAuthMiddleWare , tryCatchHandler( ItemController.createNewItem))
+router.post("/create", restaurantAuthMiddleWare, tryCatchHandler( ItemController.createNewItem))
 
 router.get("/details/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getItemDetails))
 
@@ -23,7 +22,7 @@ router.get("/by-keyword/:keyword", userAuthMiddleWare,  tryCatchHandler( ItemCon
 
 router.post("/review/:id", userAuthMiddleWare, tryCatchHandler( ItemController.addReview))
 
-router.delete("/delete/:id", restaurant1AuthMiddleWare, tryCatchHandler( ItemController.deleteItem))
+router.delete("/delete/:id", restaurantAuthMiddleWare, tryCatchHandler( ItemController.deleteItem))
 
 
 //router.post("/image", tryCatchHandler(ItemController.uploadImage))

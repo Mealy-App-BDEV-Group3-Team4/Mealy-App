@@ -1,9 +1,8 @@
 import express from 'express';
 import RestaurantController from '../controllers/restaurant.controller.js'
 import { tryCatchHandler } from '../utils/tryCatch.handler.js'
-import {userAuthMiddleWare} from "../middleware/auth.js"
-import {restaurantAuthMiddleWare} from "../middleware/auth.js"
-import {searchByKeywordMiddleware} from "../middleware/auth.js"
+import {userAuthMiddleWare, searchByKeywordMiddleware, restaurantAuthMiddleWare} from "../middleware/auth.js"
+
 
 const router = new express.Router()
 

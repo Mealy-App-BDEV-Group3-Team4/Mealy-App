@@ -6,7 +6,6 @@ import { mongoIdValidator } from "../validators/mongoId.validator.js"
 
 export default class RestaurantController {
 
-
   static async createRestaurant(req, res,){
     const { error } = createRestaurantValidator.validate(req.body)
     if(error) throw error

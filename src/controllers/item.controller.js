@@ -1,5 +1,6 @@
 import {createNewItemValidator, addItemReviewValidator} from "../validators/item.validator.js"
 import Item from "../model/item.model.js"
+import User from "../model/user.model.js"
 import Restaurant from "../model/restaurant.model.js"
 import { BadUserRequestError, NotFoundError, AccessDeniedError} from "../error/error.js"
 import { mongoIdValidator } from "../validators/mongoId.validator.js"

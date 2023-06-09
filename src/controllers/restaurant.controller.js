@@ -3,6 +3,7 @@ import Restaurant from "../model/restaurant.model.js"
 import User from "../model/user.model.js"
 import { BadUserRequestError, NotFoundError } from "../error/error.js"
 import { mongoIdValidator } from "../validators/mongoId.validator.js"
+import {getRestaurantToken} from "../utils/jwt.js"
 
 export default class RestaurantController {
 

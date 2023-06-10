@@ -118,7 +118,7 @@ export default class RestaurantController {
     if( error ) throw new BadUserRequestError("Please pass in a valid mongoId")
 
     const restaurant = await Restaurant.findOne({ category: category })
-    if(!restaurant) throw new NotFoundError(`The restaurant with this id: ${category}, does not exist`)
+    if(!restaurant) throw new NotFoundError(`The restaurant with this category: ${category}, does not exist`)
 
     return res.status(200).json({
       message: "Restaurant found successfully",

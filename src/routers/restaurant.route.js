@@ -8,7 +8,7 @@ const router = new express.Router()
 
 router.post("/create", userAuthMiddleWare, tryCatchHandler( RestaurantController.createRestaurant) )
 
-router.get("/restaurantsBycreator", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchRestaurantsByUsers))
+router.get("/searchBycreator", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchRestaurantsByUsers))
 
 router.get("/all-restaurants", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchAllrestaurants))
 

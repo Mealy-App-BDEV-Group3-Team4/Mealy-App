@@ -45,8 +45,6 @@ export default class RestaurantController {
   
   
   static async searchAllrestaurants(req, res,){
-      // const {error } = createRestaurantValidator.validate(req.body)
-      // if(error) throw error
       const restaurants = await Restaurant.find()
       res.status(201).json({
       message: "Restaurant found successfully",

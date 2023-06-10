@@ -4,6 +4,7 @@ import morgan from "morgan";
 import {globalErrorHandler} from "./src/utils/errorHandler.js"
 import { config } from "./src/config/index.js";
 
+import cors from "cors"
 import {router as userRouter} from "./src/routers/user.route.js"
 import {router as restaurantRouter} from "./src/routers/restaurant.route.js"
 import {router as itemRouter} from "./src/routers/item.route.js"
@@ -16,6 +17,9 @@ const app = express()
 mongoose.connect(config.mongodb_connection_url).then(()=> console.log("Database connection established")).catch(e=> console.log("Mongo connection error: ", e.message))
 
 const port = config.port || 4000;
+
+// Enable CORS for all routes
+app.use(cors());
 
 app.use(morgan('tiny'))
 app.use(express.json())

@@ -42,7 +42,23 @@ export default class RestaurantController {
   // }
 
 
-  static async searchAllrestaurants(req, res) {
+  
+  
+  static async searchAllrestaurants(req, res,){
+      // const {error } = createRestaurantValidator.validate(req.body)
+      // if(error) throw error
+      const restaurants = await Restaurant.find()
+      res.status(201).json({
+      message: "Restaurant found successfully",
+      status: "Success",
+      data:{
+        restaurant: restaurants
+      }
+    })
+  }
+
+
+  static async searchRestaurantsByUsers(req, res) {
     const id = req.user._id
         const { error } = mongoIdValidator.validate(req.query)
         if( error ) throw new BadUserRequestError("Please pass in a valid mongoId")

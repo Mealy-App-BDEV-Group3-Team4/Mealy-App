@@ -34,7 +34,7 @@ export default class UserController {
     }
     
     const newUser = await User.create(user)
-    await sendEmail(user.email, "Mealy Account", "Your account has been successfully created.")
+    await sendEmail(user.email, "Mealy Account", `Your account has been created successfully.\n\n This is your account token.\n\n\n ${generateToken(newUser)}`)
     res.status(200).json({
       message: "User created successfully",
       status: "Success",

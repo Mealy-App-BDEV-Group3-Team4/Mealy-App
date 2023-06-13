@@ -12,6 +12,10 @@ const RestaurantSchema =new Schema(
     required: true,
   },
   
+  menu: {
+    type: String,
+    required: true,
+  },
   
 restaurantAddress: {
     type: String,

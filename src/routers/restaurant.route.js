@@ -10,9 +10,9 @@ router.post("/create", userAuthMiddleWare, tryCatchHandler( RestaurantController
 
 router.get("/searchBycreator", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchRestaurantsByUsers))
 
-router.get("/all-restaurants", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchAllrestaurants))
+router.get("/all-restaurants",  tryCatchHandler( RestaurantController.searchAllrestaurants))
 
-router.get("/keyword", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchByKeyword) )
+router.get("/keyword", searchByKeywordMiddleware, tryCatchHandler( RestaurantController.searchByKeyword) )
 
 router.get("/:category", searchByKeywordMiddleware, tryCatchHandler( RestaurantController.searchBycategory) )
 

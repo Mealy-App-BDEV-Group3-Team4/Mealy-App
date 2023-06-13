@@ -21,7 +21,8 @@ export function searchByKeywordMiddleware(req, res, next) {
     req.searchFilter = {
       $or: [
         { name: { $regex: keyword, $options: "i" } },
-        { description: { $regex: keyword, $options: "i" } },
+        { restaurantAddress: { $regex: keyword, $options: "i" } },
+        { contactInfo: { $regex: keyword, $options: "i" } },
         { category: { $regex: keyword, $options: "i" } },
       ],
     };

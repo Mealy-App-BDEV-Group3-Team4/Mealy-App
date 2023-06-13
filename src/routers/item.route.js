@@ -8,15 +8,15 @@ const router = Router()
 
 router.post("/create", restaurantAuthMiddleWare, tryCatchHandler( ItemController.createNewItem))
 
-router.get("/details/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getItemDetails))
+router.get("/details/:id", tryCatchHandler( ItemController.getItemDetails))
 
-router.get("/nutri-info/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getNutritionInfo))
+router.get("/nutri-info/:id", tryCatchHandler( ItemController.getNutritionInfo))
 
-router.get("/all-reviews/:id", userAuthMiddleWare, tryCatchHandler( ItemController.getItemReviews))
+router.get("/all-reviews/:id", tryCatchHandler( ItemController.getItemReviews))
 
-router.get("/by-restaurant/:id", userAuthMiddleWare, tryCatchHandler( ItemController.findItemsByRestaurant))
+router.get("/by-restaurant/:id", tryCatchHandler( ItemController.findItemsByRestaurant))
 
-router.get("/by-category/:id", userAuthMiddleWare,  tryCatchHandler( ItemController.findItemsByCategory))
+router.get("/by-category/:id",  tryCatchHandler( ItemController.findItemsByCategory))
 
 router.get("/by-keyword/:keyword", userAuthMiddleWare,  tryCatchHandler( ItemController.findItemsByKeyword))
 

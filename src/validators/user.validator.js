@@ -39,5 +39,7 @@ export const userUpdateValidator = Joi.object({
 }).strict()
 
 export const passwordResetValidator = Joi.object({
-  email:Joi.string().required()
+  email:Joi.string().required(),
+  password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/)
+  .required()
 }).strict()

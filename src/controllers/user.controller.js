@@ -9,6 +9,7 @@ import Token from "../model/token.model.js"
 import nodemailer from 'nodemailer'
 import smtpTransport from 'nodemailer-smtp-transport';
 import sendEmail from "../utils/mail.handler.js"
+import generateOtp from "../utils/otp.handler.js"
 import {config} from "../config/index.js"
 
 
@@ -34,7 +35,7 @@ export default class UserController {
     }
     
     const newUser = await User.create(user)
-    await sendEmail(user.email, "Mealy Account", `Your account has been created successfully.\n\n This is your account token.\n\n\n ${generateToken(newUser)}`)
+    await sendEmail(user.email, "Mealy Account", `Your account has been created successfully.\n\n This is your account token.\n\n\n ${generateOtp()}`)
     res.status(200).json({
       message: "User created successfully",
       status: "Success",

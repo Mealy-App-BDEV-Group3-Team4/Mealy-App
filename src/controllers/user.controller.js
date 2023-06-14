@@ -1,5 +1,5 @@
 import User from "../model/user.model.js"
-import { userSignUpValidator, userLoginValidator, userUpdateValidator, passwordResetValidator } from "../validators/user.validator.js"
+import { userSignUpValidator, userLoginValidator, userUpdateValidator, passwordResetValidator, forgotPasswordValidator} from "../validators/user.validator.js"
 import { mongoIdValidator } from "../validators/mongoId.validator.js"
 import { BadUserRequestError, NotFoundError } from "../error/error.js"
 import {generateToken} from "../utils/jwt.js"
@@ -98,7 +98,7 @@ export default class UserController {
   
   static async forgotPassword(req, res) {
     try {
-        const { error } = passwordResetValidator.validate(req.body);
+        const { error } = forgotPasswordValidator.validate(req.body);
         if (error) return res.status(400).send(error.details[0].message);
 
         const user = await User.findOne({ email: req.body.email });

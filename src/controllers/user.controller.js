@@ -133,14 +133,14 @@ static async resetUserPassword(req, res) {
       if (!user) return res.status(400).send("Invalid link or expired");
 
       const token = await Token.findOne({
-          // userId: user._id,
+          userId: user._id,
           token: req.params.token,
       });
       if (!token) return res.status(400).send("Invalid link or expired");
 
       user.password = req.body.password;
       await user.save();
-      await token.delete();
+      await token.deleteOne();
 
       res.send("Password reset is successful.");
   } catch (error) {

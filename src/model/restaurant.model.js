@@ -7,14 +7,14 @@ const RestaurantSchema =new Schema(
     required: true,
     unique: true
   },
-  category:{
-    type: [{
-      menu: {
-        type: Types.ObjectId,
-          ref: "Item",
-      },
-      rating : Number,
-    }],
+  category: {
+    type: String,
+    required: true,
+  },
+  
+  menu: {
+    type: String,
+    required: true,
   },
   
 restaurantAddress: {

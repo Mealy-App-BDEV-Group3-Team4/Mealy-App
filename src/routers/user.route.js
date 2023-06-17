@@ -8,7 +8,7 @@ router.post("/signUp", tryCatchHandler( UserController.userSignUp) )
 
 router.post("/login", tryCatchHandler( UserController.userLogin) )
 
-// router.patch('/:id', tryCatchHandler( UserController.userUpdate) )
+router.patch('/:id', tryCatchHandler( UserController.userUpdate) )
 
 router.post('/forgotPassword', tryCatchHandler( UserController.forgotPassword) )
 

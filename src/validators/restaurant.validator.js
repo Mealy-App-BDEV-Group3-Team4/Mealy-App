@@ -4,10 +4,14 @@ export const createRestaurantValidator = Joi.object({
   customer: Joi.objectId().required(),
   customerId: Joi.objectId().required(),
   name: Joi.string().required(),
-  category: Joi.string().required(),
-  menu: Joi.string().required(),
+  category: Joi.object({
+    rating: Joi.number(),
+    menu: Joi.objectId().required(),
+    dateReviewed: Joi.string(),
+}),
   restaurantAddress: Joi.string().required(),
-  contactInfo: Joi.string().required()
+  contactInfo: Joi.string().required(),
+  
 }).strict()
 
 

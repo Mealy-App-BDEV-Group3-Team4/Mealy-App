@@ -1,6 +1,7 @@
 import speakeasy from 'speakeasy';
 
-function generateOtp() {
+
+export function generateOtp() {
   // Generate a new secret key
   const secret = speakeasy.generateSecret();
 
@@ -15,5 +16,16 @@ function generateOtp() {
   return otp ;
 }
 
-export default generateOtp
 
+
+export function verifyOtp(otp) {
+  const secret = generateOtp()
+
+  const isValid = verify({
+    secret: secret,
+    encoding: "base32",
+    token: otp
+  });
+
+  return isValid;
+}

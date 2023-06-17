@@ -173,8 +173,8 @@ static async resetUserPassword(req, res) {
 
 
 static async findUser(req, res,) {
-  const { id } = req.query
-  const { error } = mongoIdValidator.validate(req.query)
+  const { id } = req.params
+  const { error } = mongoIdValidator.validate(req.params)
   if (error) throw new BadUserRequestError("Please pass in a valid mongoId")
   const user = await User.findById(id)
   if (!user) throw new NotFoundError('User not found')

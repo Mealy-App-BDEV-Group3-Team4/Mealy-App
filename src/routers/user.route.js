@@ -14,7 +14,7 @@ router.post('/forgotPassword', tryCatchHandler( UserController.forgotPassword) )
 
 router.post('/password-reset/:userId/:token', tryCatchHandler( UserController.resetUserPassword) )
 
-// router.get('find/:id', tryCatchHandler( UserController.findUser) )
+router.get('find/:id', tryCatchHandler( UserController.findUser) )
 
 router.post('/logout', tryCatchHandler( UserController.logOut) )
 

@@ -13,7 +13,7 @@ const RestaurantSchema =new Schema(
   },
   
   menu: {
-    type: [String],
+    type: Array,
     required: true,
   },
   

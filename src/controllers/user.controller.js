@@ -176,7 +176,7 @@ static async findUser(req, res,) {
   const { id } = req.params
   const { error } = mongoIdValidator.validate(req.params)
   if (error) throw new BadUserRequestError("Please pass in a valid mongoId")
-  const user = await User.findById(id)
+  const user = await User.findOne(id)
   if (!user) throw new NotFoundError('User not found')
 
   res.status(200).json({

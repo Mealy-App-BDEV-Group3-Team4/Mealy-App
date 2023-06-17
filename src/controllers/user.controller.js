@@ -77,7 +77,7 @@ export default class UserController {
  
 
   static async userUpdate(req, res){
-    const { id } = req.query
+    const { id } = req.params
     const userUpdateValidatorResponse = await userUpdateValidator.validate(req.body)
     const userUpdateError = userUpdateValidatorResponse.error
     if(userUpdateError) throw userUpdateError

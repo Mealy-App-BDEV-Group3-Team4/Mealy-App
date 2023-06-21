@@ -11,6 +11,10 @@ const RestaurantSchema =new Schema(
     type: String,
     required: true,
   },
+  deliveryCategory: {
+    type: String,
+    required: true,
+  },
   
   menu: {
     type: Array,

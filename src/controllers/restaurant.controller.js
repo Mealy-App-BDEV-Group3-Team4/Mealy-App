@@ -92,6 +92,7 @@ export default class RestaurantController {
             { restaurantAddress: { $regex: keyword, $options: "i" } },
             { contactInfo: { $regex: keyword, $options: "i" } },
             { category: { $regex: keyword, $options: "i" } },
+            { deliveryCategory: { $regex: keyword, $options: "i" } },
           ],
         });
       

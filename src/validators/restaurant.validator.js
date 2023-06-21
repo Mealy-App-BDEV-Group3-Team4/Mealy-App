@@ -5,6 +5,7 @@ export const createRestaurantValidator = Joi.object({
   customerId: Joi.objectId().required(),
   name: Joi.string().required(),
   category: Joi.string().required(),
+  deliveryCategory: Joi.string().required(),
   menu: Joi.array().required(),
   restaurantAddress: Joi.string().required(),
   contactInfo: Joi.string().required()

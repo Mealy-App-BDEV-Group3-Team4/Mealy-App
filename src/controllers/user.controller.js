@@ -34,8 +34,14 @@ export default class UserController {
       userAddress: req.body.userAddress,
     }
 
+    await sendEmail(user.email, "Mealy Account", `This is your account token.\n\n Please enter your four digit number.\n\n\n ${generateOtp()}`)
+    
+    const userOtp = otp.verifyOtp()
+    if(!userOtp)
+    await sendEmail(user.email, "Mealy Account", "Enter a valid number")
+
     const newUser = await User.create(user)
-    await sendEmail(user.email, "Mealy Account", `Your account has been created successfully.\n\n This is your account token.\n\n\n ${generateOtp()}`)
+    await sendEmail(user.email, "Mealy Account", "Your account has been created successfully.")
     
     res.status(200).json({
       message: "User created successfully",

@@ -11,6 +11,7 @@ import smtpTransport from 'nodemailer-smtp-transport';
 import sendEmail from "../utils/mail.handler.js"
 import {generateOtp, verifyOtp} from "../utils/otp.handler.js"
 import {config} from "../config/index.js"
+import { token } from "morgan"
 
 
 export default class UserController {
@@ -34,10 +35,10 @@ export default class UserController {
       userAddress: req.body.userAddress,
     }
 
-    await sendEmail(user.email, "Mealy Account", `This is your account token.\n\n Please enter your four digit number.\n\n\n ${generateOtp()}`)
-    
-    const userOtp = otp.verifyOtp()
-    if(!userOtp)
+    await sendEmail(user.email, "Mealy Account", `This is your account token.\n\n Please enter your four digit number in the space provided.\n\n\n ${generateOtp()}`)
+  
+    verifyOtp(token)
+    if(!isValid)
     await sendEmail(user.email, "Mealy Account", "Enter a valid number")
 
     const newUser = await User.create(user)

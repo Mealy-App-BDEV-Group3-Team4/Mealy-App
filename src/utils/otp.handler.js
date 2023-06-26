@@ -21,7 +21,7 @@ export function generateOtp() {
 export function verifyOtp(otp) {
   const secret = generateOtp()
 
-  const isValid = verify({
+  const isValid = verifyOtp({
     secret: secret,
     encoding: "base32",
     token: otp

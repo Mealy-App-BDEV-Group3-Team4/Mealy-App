@@ -37,9 +37,9 @@ export default class UserController {
 
     await sendEmail(user.email, "Mealy Account", `This is your account token.\n\n Please enter your four digit number in the space provided.\n\n\n ${generateOtp()}`)
   
-    verifyOtp(token)
-    if(!isValid)
-    await sendEmail(user.email, "Mealy Account", "Enter a valid number")
+    // verifyOtp(token)
+    // if(!isValid)
+    // await sendEmail(user.email, "Mealy Account", "Enter a valid number")
 
     const newUser = await User.create(user)
     await sendEmail(user.email, "Mealy Account", "Your account has been created successfully.")

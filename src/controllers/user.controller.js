@@ -3,6 +3,7 @@ import { userSignUpValidator, userLoginValidator, userUpdateValidator, passwordR
 import { mongoIdValidator } from "../validators/mongoId.validator.js"
 import { BadUserRequestError, NotFoundError } from "../error/error.js"
 import {generateToken} from "../utils/jwt.js"
+// import { otpAuthMiddleWare} from "../middleware/auth.js"
 import bcrypt from "bcrypt"
 import crypto from "crypto"
 import Token from "../model/token.model.js"
@@ -17,42 +18,61 @@ import { token } from "morgan"
 export default class UserController {
 
   static async userSignUp(req, res) {
-     const { error, value } = userSignUpValidator.validate(req.body)
-     console.log(error)
-     if (error) return res.status(400).json({status: "failed", message: error.details[0].message })
-     const usernameExists = await User.findOne({ userName: req.body.userName })
-     console.log(usernameExists, "This is what im logging")
-    if (usernameExists != null || usernameExists != undefined) throw new BadUserRequestError("An account with this username already exists.")
-    const emailExists = await User.findOne({ email: req.body.email })
-    if (emailExists) throw new BadUserRequestError("An account with this email already exists.")
-    
-    const saltRounds = config.bycrypt_salt_round
-    const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
-    const user = {
-      userName: req.body.userName,
-      email: req.body.email,
-      password: hashedPassword,
-      userAddress: req.body.userAddress,
-    }
+    const { error, value } = userSignUpValidator.validate(req.body)
+    console.log(error)
+    if (error) return res.status(400).json({status: "failed", message: error.details[0].message })
+    const usernameExists = await User.findOne({ userName: req.body.userName })
+    console.log(usernameExists, "This is what im logging")
+   if (usernameExists != null || usernameExists != undefined) throw new BadUserRequestError("An account with this username already exists.")
+   const emailExists = await User.findOne({ email: req.body.email })
+   if (emailExists) throw new BadUserRequestError("An account with this email already exists.")
+   
+   const saltRounds = config.bycrypt_salt_round
+   const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
+   const user = {
+     userName: req.body.userName,
+     email: req.body.email,
+     password: hashedPassword,
+     userAddress: req.body.userAddress,
+   }
 
-    await sendEmail(user.email, "Mealy Account", `This is your account token.\n\n Please enter your four digit number in the space provided.\n\n\n ${generateOtp()}`)
   
-    // verifyOtp(token)
-    // if(!isValid)
-    // await sendEmail(user.email, "Mealy Account", "Enter a valid number")
+ 
+   // verifyOtp(token)
+   // if(!isValid)
+   // await sendEmail(user.email, "Mealy Account", "Enter a valid number")
 
-    const newUser = await User.create(user)
-    await sendEmail(user.email, "Mealy Account", "Your account has been created successfully.")
+   const newUser = await User.create(user)
+   await sendEmail(user.email, "Mealy Account", `This is your account token.\n\n  ${generateOtp()} \n\n\n "Your account has been created successfully`)
+   
+   res.status(200).json({
+     message: "User created successfully",
+     status: "Success",
+     data: {
+       user: newUser,
+       access_token: generateToken(newUser)
+     }
+   })
+ }
+//   static async verifyToken(req, res, next) {
     
-    res.status(200).json({
-      message: "User created successfully",
-      status: "Success",
-      data: {
-        user: newUser,
-        access_token: generateToken(newUser)
-      }
-    })
-  }
+//     const validOtp = req.body.token
+
+//     //  await sendEmail(user.email, "Mealy Account", `This is your account token.\n\n ${verifyOtp()} \n\n\n Please enter your four digit number in the space provided.`)
+  
+   
+//    const newUser = await User.create(user)
+//    await sendEmail(user.email, "Mealy Account", "Your account has been created successfully.")
+   
+//    res.status(200).json({
+//      message: "User created successfully",
+//      status: "Success",
+//      data: {
+//        user: newUser,
+//        access_token: generateToken(newUser)
+//      }
+//    })
+//  }
   
   static async userLogin(req, res) {
   

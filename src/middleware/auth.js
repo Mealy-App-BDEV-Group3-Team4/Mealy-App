@@ -58,6 +58,18 @@ export function restaurantAuthMiddleWare(req, res, next){
   }
 } 
 
+// export function otpAuthMiddleWare(req, res, next){
+//   const token = req.headers?.authorization?.split(" ")[1];
+//   if(!token) throw new UnAuthorizedError("Provide a token!!")
+//   try {
+   
+//     const payload = verifyOtp(otp)
+//     req.user = payload
+//     next()
+//   }catch (err){
+//     throw new UnAuthorizedError("Access denied, invalid token.")
+//   }
+// } 
 
 
 

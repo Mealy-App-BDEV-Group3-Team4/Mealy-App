@@ -1,11 +1,13 @@
 import express from 'express';
 import UserController from '../controllers/user.controller.js'
 import { tryCatchHandler } from '../utils/tryCatch.handler.js'
-import {generateOtp, verifyOtp} from "../utils/otp.handler.js"
+// import { otpAuthMiddleWare} from "../middleware/auth.js"
 
 const router = new express.Router()
 
-router.post("/signUp", verifyOtp, tryCatchHandler( UserController.userSignUp) )
+router.post("/signUp", tryCatchHandler( UserController.userSignUp) )
+
+router.post("/verifyOtp", tryCatchHandler( UserController.verifyToken) )
 
 router.post("/login", tryCatchHandler( UserController.userLogin) )
 

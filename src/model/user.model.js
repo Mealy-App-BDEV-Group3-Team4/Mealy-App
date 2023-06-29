@@ -5,7 +5,6 @@ const UserSchema = new Schema({
   userName: {
     type: String,
     required: true,
-    lowercase: true,
     unique: true,
     min: 3,
     max: 255
@@ -24,6 +23,7 @@ const UserSchema = new Schema({
   },
   userAddress: {
     type: String,
+    required: true
     }
 },
 {

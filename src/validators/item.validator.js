@@ -4,22 +4,41 @@ const myJoiObjectId = JoiMongoId(Joi)
 
 
 export const createNewItemValidator = Joi.object({
-  restaurant: Joi.objectId().required(),  
   name: Joi.string().required(),
   description: Joi.string().min(10).max(255),
   price: Joi.number()
-            //.max(6)
-            //.precision(2)
-            .required(),
-           // .message("Price cannot be more than 6 digts in 2 decimal places e.g ####.##"),
-   rating: Joi.number(),
-           // .max(2),
-            //.precision(1),
-            //.message("Must be 2 digits in 1 decimal place"),
- 
-  category: Joi.string().required(),
-//   restaurant: Joi.string().required(),
-  // image_url: Joi.string().required(),
+              .required()
+              .min(100)
+              .max(9000)
+              .precision(2)
+              .error(new Error('price must be a number between 100 and 9000, with a maximum of 2 decimal places')),
+  rating: Joi.number()
+              .min(1)
+              .max(5)
+              .precision(1)
+              .error(new Error('rating must be a number between 1 and 5, in one decimal place')),
+  category: Joi.string()
+              .required(),
+  image_url: Joi.string().required(),
+  nutritional_info: Joi.object({
+      ingredients: Joi.string(),
+      calories:Joi.string()
+  }),
+  review:Joi.object({
+    rating: Joi.number(),
+    statement:Joi.string(),
+    dateReviewed: Joi.string(),
+}),
   }).strict()
+ // tags: Joi.array().items(Joi.string()).min(1).max(5).unique().required(),
 
 
+ export const addItemReviewValidator = Joi.object({
+    rating: Joi.number()
+               .precision(1)
+               .min(1)
+               .max(5)
+               .error(new Error('rating must be a number between 1 and 5, in one decimal place')),
+    statement:Joi.string(),
+    dateReviewed: Joi.string(),
+ }).strict()

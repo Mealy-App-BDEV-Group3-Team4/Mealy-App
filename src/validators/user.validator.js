@@ -12,7 +12,7 @@ export const userSignUpValidator = Joi.object({
   .messages({
     'string.pattern.base': 'You need one number, one alphanumeric character and one in caps, password be more than 7 characters long',
   }),
-  userAddress: Joi.string().optional(),
+  userAddress: Joi.string().required(),
   
 }).strict()
 
@@ -38,6 +38,17 @@ export const userUpdateValidator = Joi.object({
   }) 
 }).strict()
 
+export const forgotPasswordValidator = Joi.object({
+  email:Joi.string().required(),
+}).strict()
+
 export const passwordResetValidator = Joi.object({
-  email:Joi.string().required()
+  email:Joi.string().required(),
+  password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/)
+  .required()
+}).strict()
+
+
+export const otpValidator = Joi.object({
+  otp:Joi.string().required(),
 }).strict()

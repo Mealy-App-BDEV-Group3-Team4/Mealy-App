@@ -5,7 +5,20 @@ const RestaurantSchema =new Schema(
   name: {
     type: String,
     required: true,
-    //unique: true
+    unique: true
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  deliveryCategory: {
+    type: String,
+    required: true,
+  },
+  
+  menu: {
+    type: Array,
+    required: true,
   },
   restaurantAddress: {
     type: String,
@@ -36,4 +49,10 @@ const RestaurantSchema =new Schema(
   timestamps: true
 })
 
+<<<<<<< HEAD
 export default model('Restaurant', RestaurantSchema)
+||||||| 8b240f5
+export default model(Restaurant, RestaurantSchema)
+=======
+export default model("Restaurant", RestaurantSchema)
+>>>>>>> BB-branch

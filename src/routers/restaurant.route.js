@@ -1,6 +1,8 @@
 import express from 'express';
 import RestaurantController from '../controllers/restaurant.controller.js'
 import { tryCatchHandler } from '../utils/tryCatch.handler.js'
+import {userAuthMiddleWare, searchByKeywordMiddleware, restaurantAut2hMiddleWare} from "../middleware/auth.js"
+
 
 import {userAuthMiddleWare} from "../middleware/auth.js"
 
@@ -8,17 +10,19 @@ const router = new express.Router()
 
 router.post("/create", userAuthMiddleWare, tryCatchHandler( RestaurantController.createRestaurant) )
 
-router.get("/by-category", userAuthMiddleWare, tryCatchHandler( RestaurantController.findRestaurantsByCategory) )
+router.get("/searchBycreator", userAuthMiddleWare, tryCatchHandler( RestaurantController.searchRestaurantsByUsers))
 
-router.get("/by-keyword", userAuthMiddleWare, tryCatchHandler( RestaurantController.findRestaurantsByKeyword) )
+router.get("/all-restaurants",  tryCatchHandler( RestaurantController.searchAllrestaurants))
 
-router.get("/", tryCatchHandler( RestaurantController.findRestaurant) )
+router.get("/keyword", searchByKeywordMiddleware, tryCatchHandler( RestaurantController.searchByKeyword) )
 
-router.get('/:id', tryCatchHandler( RestaurantController.findRestaurant) )
+router.get("/:category", searchByKeywordMiddleware, tryCatchHandler( RestaurantController.searchBycategory) )
 
-router.put('/:id', tryCatchHandler( RestaurantController.findRestaurant) )
+router.put("/update", userAuthMiddleWare, tryCatchHandler( RestaurantController.updateOneRestaurant))
 
-router.delete('/:id', tryCatchHandler( RestaurantController.deleteOneRestaurant) )
+router.delete("/delete", userAuthMiddleWare, tryCatchHandler( RestaurantController.deleteOneRestaurant) )
+
+
 
 
 export { router }

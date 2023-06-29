@@ -11,6 +11,8 @@ router.post("/verifyOtp", tryCatchHandler( UserController.verifyToken) )
 
 router.post("/login", tryCatchHandler( UserController.userLogin) )
 
+router.post('/otpActivation', tryCatchHandler( UserController.otpVerification) )
+
 router.patch('/:id', tryCatchHandler( UserController.userUpdate) )
 
 router.post('/forgotPassword', tryCatchHandler( UserController.forgotPassword) )

@@ -47,3 +47,8 @@ export const passwordResetValidator = Joi.object({
   password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/)
   .required()
 }).strict()
+
+
+export const otpValidator = Joi.object({
+  otp:Joi.string().required(),
+}).strict()

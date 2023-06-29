@@ -57,7 +57,7 @@ static async userSignUp(req, res) {
   
   if (!otp) {
     const token = generateOtp();
-    await sendEmail(user.email, "Mealy Account", `This is your account TOKEN: \n\n${token}\n\nFollow this link: ...... to complete your account creation.`);
+    await sendEmail(user.email, "Mealy Account", `This is your account TOKEN: \n\n${token}\n\n Please enter the TOKEN to complete your account creation.`);
     otp = await new Otp({
       userId: newUser._id,
       otp: token,

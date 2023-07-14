@@ -5,4 +5,4 @@ This repository has four branches.<br>
 3. BB-branch<br>
 4. Nurat-branch<br>
 <br>
-You are on the Nurat-branch of this repository
+You are on the staging-branch of this repository.

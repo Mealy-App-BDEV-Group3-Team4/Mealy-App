@@ -14,6 +14,7 @@ mongoose.connect(config.mongodb_connection_url).then(()=> console.log("Database 
 
 const port = config.port || 4000;
 
+//middlewares
 app.use(morgan('tiny'))
 app.use(express.json())
 
